@@ -7,7 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./App.css";
 
 function App() {
-  const { register, handleSubmit, control, watch } = useForm();
+  const { register, handleSubmit, control } = useForm();
 
   function onSubmitButton(data) {
     console.log({ data });
@@ -25,9 +25,12 @@ function App() {
             control={control}
             render={({ field: { value, onChange } }) => (
               <DatePicker
-                selected={value}
-                onChange={(value) => onChange(value)}
                 selectsRange={true}
+                startDate={value ? value[0] : null}
+                endDate={value ? value[1] : null}
+                onChange={(date) => {
+                  onChange(date);
+                }}
                 placeholderText="시작날짜를 선택해주세요."
                 isClearable={true}
               />
